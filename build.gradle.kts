@@ -1,5 +1,6 @@
 import org.gradle.api.GradleException
 import org.gradle.api.publish.maven.MavenPublication
+import org.gradle.api.publish.maven.tasks.PublishToMavenRepository
 
 plugins {
     `java-platform`
@@ -11,7 +12,7 @@ version = providers.gradleProperty("versionOverride").orElse("0.1.0-SNAPSHOT").g
 
 val stableVersionPattern =
     Regex(
-        pattern = "^(?!.*(?:alpha|beta|rc|cr|milestone|snapshot|[-.]m\\d+)).+$",
+        pattern = "(alpha|beta|rc|cr|milestone|snapshot|dev|eap|preview|nightly|canary|experimental|[-.]m\\d+)",
         option = RegexOption.IGNORE_CASE,
     )
 
@@ -74,7 +75,7 @@ val validateStableConstraints =
         doLast {
             val unstable =
                 managedVersions.filterValues { version ->
-                    !stableVersionPattern.matches(version)
+                    stableVersionPattern.containsMatchIn(version)
                 }
 
             if (unstable.isNotEmpty()) {
@@ -91,6 +92,18 @@ val validateStableConstraints =
     }
 
 tasks.named("check") {
+    dependsOn(validateStableConstraints)
+}
+
+tasks.named("publish") {
+    dependsOn(validateStableConstraints)
+}
+
+tasks.named("publishToMavenLocal") {
+    dependsOn(validateStableConstraints)
+}
+
+tasks.withType<PublishToMavenRepository>().configureEach {
     dependsOn(validateStableConstraints)
 }
 
@@ -122,7 +135,7 @@ publishing {
                 scm {
                     connection.set("scm:git:git://github.com/groundsgg/grounds-dependencies.git")
                     developerConnection.set(
-                        "scm:git:ssh://github.com:groundsgg/grounds-dependencies.git"
+                        "scm:git:ssh://git@github.com/groundsgg/grounds-dependencies.git"
                     )
                     url.set("https://github.com/groundsgg/grounds-dependencies")
                 }
