@@ -105,6 +105,13 @@ val validateConsumerFixture =
         )
     }
 
+tasks.register("test") {
+    group = "verification"
+    description = "Runs platform validation checks for CI compatibility."
+    dependsOn(validateStableConstraints)
+    dependsOn(validateConsumerFixture)
+}
+
 tasks.named("check") {
     dependsOn(validateStableConstraints)
     dependsOn(validateConsumerFixture)
