@@ -91,8 +91,18 @@ val validateStableConstraints =
         }
     }
 
+val validateConsumerFixture =
+    tasks.register<Exec>("validateConsumerFixture") {
+        group = "verification"
+        description = "Validates that the local consumer fixture builds against the published platform."
+        dependsOn("publishToMavenLocal")
+        workingDir = layout.projectDirectory.dir("fixtures/consumer").asFile
+        commandLine(layout.projectDirectory.file("gradlew").asFile.absolutePath, "build", "--no-daemon")
+    }
+
 tasks.named("check") {
     dependsOn(validateStableConstraints)
+    dependsOn(validateConsumerFixture)
 }
 
 tasks.named("publish") {
