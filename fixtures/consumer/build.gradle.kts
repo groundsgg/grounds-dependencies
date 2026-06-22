@@ -5,8 +5,11 @@ plugins {
 group = "gg.grounds"
 version = "0.1.0-SNAPSHOT"
 
+val groundsDependenciesVersion =
+    providers.gradleProperty("groundsDependenciesVersion").orElse("0.1.0-SNAPSHOT")
+
 dependencies {
-    implementation(platform("gg.grounds:grounds-dependencies:0.1.0-SNAPSHOT"))
+    implementation(platform("gg.grounds:grounds-dependencies:${groundsDependenciesVersion.get()}"))
     implementation("io.grpc:grpc-api")
     implementation("com.google.protobuf:protobuf-java")
     implementation("org.slf4j:slf4j-api")

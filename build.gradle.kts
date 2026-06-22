@@ -97,7 +97,12 @@ val validateConsumerFixture =
         description = "Validates that the local consumer fixture builds against the published platform."
         dependsOn("publishToMavenLocal")
         workingDir = layout.projectDirectory.dir("fixtures/consumer").asFile
-        commandLine(layout.projectDirectory.file("gradlew").asFile.absolutePath, "build", "--no-daemon")
+        commandLine(
+            layout.projectDirectory.file("gradlew").asFile.absolutePath,
+            "build",
+            "--no-daemon",
+            "-PgroundsDependenciesVersion=$version",
+        )
     }
 
 tasks.named("check") {
