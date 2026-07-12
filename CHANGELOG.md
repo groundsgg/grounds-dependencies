@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.0.0](https://github.com/groundsgg/grounds-dependencies/compare/v0.1.0...v1.0.0) (2026-07-12)
+
+
+### ⚠ BREAKING CHANGES
+
+* **deps:** bump minestom to 2026.07.12-26.2 ([#3](https://github.com/groundsgg/grounds-dependencies/issues/3))
+
+### Features
+
+* **deps:** bump minestom to 2026.07.12-26.2 ([#3](https://github.com/groundsgg/grounds-dependencies/issues/3)) ([7cf96e0](https://github.com/groundsgg/grounds-dependencies/commit/7cf96e0759c7fb59bf073d95220ca99ed3e44d0e))
+
 ## [0.1.0](https://github.com/groundsgg/grounds-dependencies/compare/v0.0.1...v0.1.0) (2026-06-24)
 
 
