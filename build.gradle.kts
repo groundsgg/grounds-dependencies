@@ -54,7 +54,7 @@ val managedVersions =
         "io.kubernetes:client-java" to "26.0.0",
         "redis.clients:jedis" to "7.5.2",
         "com.nimbusds:nimbus-jose-jwt" to "10.9.1",
-        "net.minestom:minestom" to "2026.06.20-26.1.2",
+        "net.minestom:minestom" to "2026.07.12-26.2",
         "io.papermc.paper:paper-api" to "26.1.2.build.72-stable",
         "com.velocitypowered:velocity-api" to "3.4.0",
     )
